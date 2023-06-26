@@ -11,13 +11,13 @@ namespace Business.Tests
 	public class StarPortOnMarsParserTests
 	{
 		[Test]
-		public void ParsePort_COM1_Returns1()
+		public void ParsePort_MARS8_Returns8()
 		{
 			int result = StarPortOnMarsParser.ParsePort("MARS8");
 			Assert.That(result, Is.EqualTo(8));
 
 			//----------------------------------older style of Asserts in NUnit----------------------------
-			//Assert.AreEqual(1, result);
+			//Assert.AreEqual(8, result);
 		}
 	}
 }

@@ -79,7 +79,7 @@ namespace Business.Tests
 		}
 
 		[Test]
-		//[Ignore("")]
+		[Ignore("Reasons Date events")]
 		public void RangesEqualsValueOfDates()
 		{
 			//ranges of DateTimes
@@ -97,6 +97,7 @@ namespace Business.Tests
 		#region Nulls and Booleans
 
 		[Test]
+		[Category("NullAndBooleans")]
 		public void DefaultNameIsNull()
 		{
 			Character character = new Character(Type.Human);
@@ -105,6 +106,7 @@ namespace Business.Tests
 		}
 
 		[Test]
+		[Category("NullAndBooleans")]
 		public void IsDead_KillCharacter_ReturnsTrue() 
 		{
 			Character character = new Character(Type.Human);

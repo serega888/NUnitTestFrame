@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Business.Tests
 {
 	[TestFixture]
+	[Category("Character")]
 	public class CharacterSetUpAndTearDownTests
 	{
 		private Character _character;

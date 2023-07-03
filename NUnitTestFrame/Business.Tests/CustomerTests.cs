@@ -28,7 +28,20 @@ namespace Business.Tests
 			const decimal expectedWage = 100 * 10;
 
 			Assert.That(actual, Is.EqualTo(expectedWage).Within(0.1));
+		}
 
+		[Test]
+		// проверка метод CalculateWage вызывает класс WorkingStatistics() с правильным Id 
+		public void CalculateWage_PassesCorrectId()
+		{
+			const int id = 1;
+
+			DbGateWaySpy gateWaySpy = new DbGateWaySpy();
+			gateWaySpy.SetWorkingStatistics(new WorkingStatistics());
+			Customer customer = new Customer(gateWaySpy, new LoggerDummy());
+			customer.CalculateWage(id);
+
+			Assert.That(id, Is.EqualTo(gateWaySpy.Id));
 		}
 	}
 }

@@ -31,7 +31,7 @@ namespace Business.Tests
 		}
 
 		[Test]
-		// проверка метод CalculateWage вызывает класс WorkingStatistics() с правильным Id 
+		//Через шпиона происходит проверка метод CalculateWage вызывает класс WorkingStatistics() с правильным Id 
 		public void CalculateWage_PassesCorrectId()
 		{
 			const int id = 1;
@@ -42,6 +42,20 @@ namespace Business.Tests
 			customer.CalculateWage(id);
 
 			Assert.That(id, Is.EqualTo(gateWaySpy.Id));
+		}
+
+		[Test]
+		// Через подставку происходит проверка метод CalculateWage вызывает класс WorkingStatistics() с правильным Id 
+		public void CalculateWage_Mock_PassesCorrectId()
+		{
+			const int id = 1;
+			DbGateWayMock gateWayMock = new DbGateWayMock();
+			gateWayMock.SetWorkingStatistics(new WorkingStatistics());
+
+			Customer customer = new Customer(gateWayMock, new LoggerDummy());
+			customer.CalculateWage(id);
+
+			Assert.IsTrue(gateWayMock.VeryfiedCalledWithPropertyId(id));
 		}
 	}
 }

@@ -69,6 +69,7 @@ namespace Business.Tests
 
 			Assert.IsTrue(gateWayFake.VeryfiedCalledWithPropertyId(id));
 		}
+
 		[Test]
 		public void CalculateWageFake_HourlyPayed_ReturnsCorrectWage()
 		{

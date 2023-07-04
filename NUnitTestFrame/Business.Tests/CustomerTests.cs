@@ -57,5 +57,28 @@ namespace Business.Tests
 
 			Assert.IsTrue(gateWayMock.VeryfiedCalledWithPropertyId(id));
 		}
+
+		[Test]
+		// Через подделку происходит проверка метод CalculateWage вызывает класс WorkingStatistics() с правильным Id 
+		public void CalculateWage_Fake_PassesCorrectId()
+		{
+			const int id = 1;
+			DbGateWayFake gateWayFake = new DbGateWayFake();
+			Customer customer = new Customer(gateWayFake, new LoggerDummy());
+			customer.CalculateWage(id);
+
+			Assert.IsTrue(gateWayFake.VeryfiedCalledWithPropertyId(id));
+		}
+		[Test]
+		public void CalculateWageFake_HourlyPayed_ReturnsCorrectWage()
+		{
+			DbGateWayFake gateWayFake = new DbGateWayFake();
+			Customer customer = new Customer(gateWayFake, new LoggerDummy());
+			const int anyId = 1;
+			decimal actualWage = customer.CalculateWage(anyId);
+			const decimal expectedWage = 5 * 10;
+
+			Assert.That(actualWage, Is.EqualTo(expectedWage).Within(0.1));
+		}
 	}
 }

@@ -21,19 +21,21 @@ namespace Business.TestDouble.Testable
 		{
 			//if (!_gateway.Connected)
 			//{
-			//    return 0;
-			//}
-			//WorkingStatistics ws = null;
-			//try
-			//{
-			//	ws = _gateway.GetWorkingStatistics(id);
-			//}
-			//catch (Exception ex)
-			//{
 			//	return 0;
 			//}
-			WorkingStatistics ws = _gateway.GetWorkingStatistics(id);
+
+			WorkingStatistics ws = null;
+			try
+			{
+				ws = _gateway.GetWorkingStatistics(id);
+			}
+			catch (Exception ex)
+			{
+				return 0;
+			}
+
 			decimal wage;
+
 			if (ws.PayHourly)
 			{
 				wage = ws.WorkingHours * ws.HourSalary;
@@ -64,7 +66,7 @@ namespace Business.TestDouble.Testable
 	public interface IDbGateway
 	{
 		WorkingStatistics GetWorkingStatistics(int id);
-		//bool Connected { get; }
+		bool Connected { get; }
 	}
 
 	public class DbGateway : IDbGateway
@@ -76,7 +78,7 @@ namespace Business.TestDouble.Testable
 			throw new global::Business.TestDouble.UnTestable.NoConnection();
 		}
 
-		//public bool Connected { get; }
+		public bool Connected { get; }
 	}
 
 	public class NoConnection : Exception
